@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html style="margin-left: 70px;">
+<head>
+	<meta charset="UTF-8">
+	<title>Geolocation - Dive Into HTML5</title>
+</head>
+<body>
+	<p>You are here: <span><a href="">Home </a></span><span><a href="">Dive Into HTML5</a></span></p>
+	<h1 style="text-align: center;">№6</h1>
+	<h1 style="text-align: center;">YOU ARE HERE</h1>
+	<h1 style="text-align: center;">(AND SO IS EVERYBODY ELSE)</h1>
+	<br>
+	<p style="text-align: center;"><a href="">show table of contents</a></p>
+	<br>
+	<h2 style="text-align: center;">DIVING IN</h2>
+
+	<p style="display: inline-block;"><img src="http://diveinto.html5doctor.com/i/aoc-g.png" alt="G" width="103px" height="106px" style="float: left;">eolocation is the art of figuring out where you are in the world and (optionally) sharing that information with people you trust. There is more than one way to figure out where you are — your IP address, your wireless network connection, which cell tower your phone is talking to, or dedicated GPS hardware that calculates latitude and longitude from information sent by satellites in the sky.</p>
+	<br>
+	<div>
+		<h4>ASK PROFESSOR MARKUP</h4>
+		<p>Q: Geolocation sounds scary. Can I turn it off?</p>
+		<p>A: Privacy is an obvious concern when you’re talking about sharing your physical location with a remote web server. The geolocation API explicitly states: “User Agents must not send location information to Web sites without the express permission of the user.” In other words, sharing your location is always opt-in. If you don’t want to, you don’t have to.</p>
+	</div>
+	<br>
+	<h2 style="text-align: center;">THE GEOLOCATION API</h2>
+	<p style="text-align: left;">The <a href="">geolocation API</a> lets you share your location with trusted web sites. The latitude and longitude are available to JavaScript on the page, which in turn can send it back to the remote web server and do fancy location-aware things like finding local businesses or showing your location on a map. <br><br><br>As you can see from the following table, the geolocation API is supported by most browsers on the desktop and mobile devices. Additionally, some older browsers and devices can be supported by wrapper libraries, as we’ll see later in this chapter.</p>
+
+	<p style="text-align: center;"><strong>GEOLOCATION API SUPPORT</strong></p> 
+	<table style="margin-left: 390px">
+	<tr><td>IE</td><td>FIREFOX</td><td>SAFARI</td><td>CHROME</td><td>OPERA</td><td>IPHONE</td><td>ANDROID</td></tr>
+	<tr><td>9.0+</td><td>3.5+</td><td>5.0+</td><td>5.0+</td><td>10.6+</td><td>3.0+</td><td>2.0+</td></tr>	
+	</table>
+	<p>Along with support for the standard geolocation API, there are a plethora of device-specific APIs on other mobile platforms. I’ll cover all that later in this chapter.</p><br>
+
+	<h2 style="text-align: center;">SHOW ME THE CODE</h2>
+	<p>The geolocation API centers around a new property on the global navigator object: navigator.geolocation.</p>
+	<p>The simplest use of the geolocation API looks like this:</p>
+	<pre>
+	function get_location(){
+	  <mark>navigator.geolocation.getCurrentPosition</mark>(show_map);
+	}
+	</pre>
+	<p>That has no detection, no error handling, and no options. Your web application should probably include at least the first two of those. To detect support for the geolocation API, you can use Modernizr:</p>
+	<pre>
+	function get_location() {
+  	  if (<mark>Modernizr.geolocation</mark>) {                                      <strong>I CAN HAS GEO?</strong>
+	    navigator.geolocation.getCurrentPosition(show_map);
+     	  } else {
+    	  // no native support; maybe try Gears?
+ 	  }
+	}
+	</pre>
+	<p>What you do without geolocation support is up to you. I’ll explain the Gears fallback option in a minute, but first I want to talk about what happens during that call to getCurrentPosition(). As I mentioned at the beginning of this chapter, geolocation support is opt-in. That means your browser will never force you to reveal your current physical location to a remote server. The user experience differs from browser to browser. In Mozilla Firefox, calling the getCurrentPosition() function of the geolocation API will cause the browser to pop up an “infobar” at the top of the browser window. The infobar looks like this:</p>
+	<img src="http://diveinto.html5doctor.com/i/geolocation-opt-in.png" alt="string"  style="margin-left: 200px;">
+
+	<p>There’s a lot going on here. You, as the end user,</p>
+	<ul>
+		<li>are told that a website wants to know your location</li>
+		<li>are told <i>which</i> website wants to know your locatio</li>
+		<li>can click through to <a href="">Mozilla’s “Location-Aware Browsing” help page</a> which explains what the heck is going on (short story: Google provides the location and stores your data in accordance with its <a href="">Location Service Privacy Policy)</a></li>
+		<li>can choose to share your location</li>
+		<li>can choose <i>not</i> to share your location</li>
+		<li>can tell your browser to remember your choice (either way, share or don’t share) so you never see this infobar again on this website</li>
+	</ul>
+	<p>Furthermore, this infobar is</p>
+	<ul>
+		<li>non-modal, so it won’t prevent you from switching to another browser window or tab</li>
+		<li>tab-specific, so it will disappear if you switch to another browser window or tab and reappear when you switch back to the original tab</li>
+		<li>unconditional, so there is no way for a website to bypass it</li>
+		<li>blocking, so there is no chance that the website can determine your location while it’s waiting for your answer</li>
+	</ul>
+	<p>You just saw the JavaScript code that causes this infobar to appear. It’s a single function call which takes a callback function (which I called show_map). The call to getCurrentPosition() will return immediately, but that doesn’t mean that you have access to the user’s location. The first time you are guaranteed to have location information is in the callback function. The callback function looks like this:</p>
+	<pre>
+	function show_map(position){
+	  var latitude = position.coords.latitude;
+	  var longitude = position.coords.longitude;
+	  // let's show a map or do something interesting!
+	}
+	</pre>
+	<p>The callback function will be called with a single parameter, an object with two properties: coords and timestamp. The timestamp is just that, the date and time when the location was calculated. (Since this is all happening asynchronously, you can’t really know when that will happen in advance. It might take some time for the user to read the infobar and agree to share their location. Devices with dedicated GPS hardware may take some more time to connect to a GPS satellite. And so on.) The coords object has properties like latitude and longitude which are exactly what they sound like: the user’s physical location in the world.</p>
+
+	<h3 style="text-align: center;">POSITION OBJECT</h3>
+	<table style="margin-left: 420px">
+		<tr><td>Property</td><td>Type</td><td>Notes</td></tr>
+		<tr><td>coords.latitude</td><td>double</td><td>decimal degrees</td></tr>
+		<tr><td>coords.longitude</td><td>double</td><td>decimal degrees</td></tr>
+		<tr><td>coords.altitude</td><td>double or null</td><td>meters above the reference ellipsoid</td></tr>
+		<tr><td>coords.accuracy</td><td>double</td><td>meters</td></tr>
+		<tr><td>coords.altitudeAccuracy</td><td>double or null</td><td>meters</td></tr>
+		<tr><td>coords.heading</td><td>double or null</td><td>degrees clockwise from true north</td></tr>
+		<tr><td>coords.speed</td><td>double or null</td><td>meters/second</td></tr>
+		<tr><td>timestamp</td><td>DOMTimeStamp</td><td>like a Date() object</td></tr>
+	</table>
+
+	<img src="http://diveinto.html5doctor.com/i/openclipart.org_johnny_automatic_riding_a_bike.png" alt="bike" style="float:right;">
+	<p>Only three of the properties are guaranteed to be there (coords.latitude, coords.longitude, and coords.accuracy). The rest might come back null, depending on the capabilities of your device and the backend positioning server that it talks to. The heading and speed properties are calculated based on the user’s previous position, if possible.</p><br><br><br>
+
+	<h2 style="text-align: center;">HANDLING ERRORS</h2>
+	<p>Geolocation is complicated. Things can go wrong. I’ve mentioned the “user consent” angle already. If your web application wants the user’s location but the user doesn’t want to give it to you, you’re screwed. The user always wins. But what does that look like in code? It looks like the second argument to the getCurrentPosition() function: an error handling callback function.</p>
+	<pre>
+  navigator.geolocation.getCurrentPosition(
+    show_map, handle_error)
+  	</pre>
+  	<p>If anything goes wrong, your error callback function will be called with a PositionError object.</p>
+
+  	<h3 style="text-align: center;">POSITIONERROR OBJECT</h3>
+  	<table style="margin-left: 450px">
+  		<tr><td>Property</td><td>Type</td><td>Notes</td></tr>
+  		<tr><td>code</td><td>short</td><td>an enumerated value</td></tr>
+  		<tr><td>message</td><td>DOMString</td><td>not intended for end users</td></tr>
+  	</table>
+  	<p>The code property will be one of</p>
+  	<ul>
+  		<li>PERMISSION_DENIED (1) if the user clicks that “Don’t Share” button or otherwise denies you access to their location.</li>
+  		<li>POSITION_UNAVAILABLE (2) if the network is down or the positioning satellites can’t be contacted.</li>
+  		<li>TIMEOUT (3) if the network is up but it takes too long to calculate the user’s position. How long is “too long”? I’ll show you how to define that in the next section.</li>
+  	</ul>
+  	<h4 style="margin-left: 200px">Be gracious in defeat</h4>
+  	<pre>
+  function handle_error(err) {
+ 	if (<mark>err.code</mark> == 1) {
+	  // user said no!
+  	}
+  }
+  	</pre>
+
+  	<h4>ASK PROFESSOR MARKUP</h4>
+  	<p>Q: Does the geolocation API work on the International Space Station, on the moon, or on other planets?</p>
+  	<p>A: <a href="">The geolocation specification states</a>, “The geographic coordinate reference system used by the attributes in this interface is the World Geodetic System (2d) [WGS84]. No other reference system is supported.” The International Space Station is orbiting Earth, so <a href="">astronauts on the station</a> can describe their location by latitude, longitude, and altitude. However, the World Geodetic System is Earth-centric, so it can’t be used to describe locations on the moon or on other planets.</p><br>
+
+  	<h2 style="text-align: center;">CHOICES! I DEMAND CHOICES!</h2>
+  	<p>Some popular mobile devices — like the iPhone and Android phones — support two methods of figuring out where you are. The first method triangulates your position based on your relative proximity to different cellular towers operated by your phone carrier. This method is fast and doesn’t require any dedicated GPS hardware, but it only gives you a rough idea of where you are. Depending on how many cell towers are in your area, “a rough idea” could be as little as one city block or as much as a kilometer in every direction.</p>
+  	<div>
+  		<img src="http://diveinto.html5doctor.com/i/openclipart.org_johnny_automatic_young_girl_pointing.png" alt="man" style="float: left;">
+  		<p>The second method actually uses dedicated GPS hardware on your device to talk to dedicated GPS positioning satellites that are orbiting the Earth. GPS can usually pinpoint your location within a few meters. The downside is that the dedicated GPS chip on your device draws a lot of power, so phones and other general purpose mobile devices usually turn off the chip until it’s needed. That means there will be a startup delay while the chip is initializing its connection with the GPS satellites in the sky. If you’ve ever used Google Maps on an iPhone or other smartphone, you’ve seen both methods in action. First you see a large circle that approximates your position (finding the nearest cell tower), then a smaller circle (triangulating with other cell towers), then a single dot with an exaction position (given by GPS satellites).</p>
+  	</div><br><br><br><br>
+  	<p>The reason I mention this is that, depending on your web application, you may not need high accuracy. If you’re just looking for nearby movie listings, a “low accuracy” location is probably good enough. There aren’t that many movie theaters, even in dense cities, and you’ll probably be listing more than one of them anyway. On the other hand, if you’re giving turn by turn directions in real time, you really do need to know exactly where the user is so you can say “turn right in 20 meters” or whatever.</p><br>
+  	<p>The getCurrentPosition() function has an optional third argument, <a href="">a PositionOptions object</a>. There are three properties you can set in a PositionOptions object. All the properties are optional. You can set any or all or none of them.</p>
+  	<h3 style="text-align: center;">POSITIONOPTIONS OBJECT</h3>
+  	<table style="margin-left: 400px">
+  		<tr><td>Property</td><td>Type</td><td>Default</td><td>Notes</td></tr>
+  		<tr><td>enableHighAccuracy</td><td>Boolean</td><td>false</td><td>true might be slower</td></tr>
+  		<tr><td>timeout</td><td>long</td><td>(no default)</td><td>in miliseconds</td></tr>
+  		<tr><td>maximumAge</td><td>long</td><td>0</td><td>in miliseconds</td></tr>
+  	</table>
+  	<p>The enableHighAccuracy property is exactly what it sounds like. If true, and the device can support it, and the user consents to sharing their exact location, then the device will try to provide it. Both iPhones and Android phones have separate permissions for low- and high-accuracy positioning, so it is possible that calling getCurrentPosition() with enableHighAccuracy:true will fail, but calling with enableHighAccuracy:false would succeed.</p>
+  	<p>The timeout property is the number of milliseconds your web application is willing to wait for a position. This timer doesn’t start counting down until after the user gives permission to even try to calculate their position. You’re not timing the user; you’re timing the network.</p>
+  	<p>The maximumAge property allows the device to answer immediately with a cached position. For example, let’s say you call getCurrentPosition() for the first time, the user consents, and your success callback function is called with a position that was calculated at exactly 10:00 AM. Exactly one minute later, at 10:01 AM, you call getCurrentPosition() again with a maximumAge property of 75000.</p>
+  	<pre>
+  navigator.geolocation.getCurrentPosition(
+    success_callback, error_callback, <mark>{maximumAge: 75000}</mark>);
+  	</pre>
+  	<p>What you’re saying is that you don’t necessarily need the user’s current location. You would be satisfied with knowing where they were 75 seconds ago (75000 milliseconds). The device knows where the user was 60 seconds ago (60000 milliseconds), because it calculated their location after the first time you called getCurrentPosition(). So the device doesn’t bother to recalculate the user’s current location. It just returns exactly the same information it returned the first time: same latitude and longitude, same accuracy, and same timestamp (10:00 AM).</p>
+  	<div style="display: inline-block;">
+  	<img src="http://diveinto.html5doctor.com/i/openclipart.org_maven_Galileo_Galilei.png" alt="someone" style="float: right;">
+  	<p>Before you ask for the user’s location, you should think about just how much accuracy you need, and set enableHighAccuracy accordingly. If you need to find their location more than once, you should think about how old the information could be and still be useful, and set maximumAge accordingly. If you need to find their location continuously, then getCurrentPosition() is not for you. You need to upgrade to watchPosition().</p>
+  	<p>The watchPosition() function has the same structure as getCurrentPosition(). It takes two callback functions, a required one for success and an optional one for error conditions, and it can also take an optional PositionOptions object that has all the same properties you just learned about. The difference is that your callback function will be called every time the user’s location changes. There is no need to actively poll their position. The device will determine the optimal polling interval, and it will call your callback function whenever it determines that the user’s position has changed. You can use this to update a visible marker on a map, provide instructions on where to go next, or whatever you like. It’s entirely up to you.</p>
+  	<p>The watchPosition() function itself returns a number. You should probably store this number somewhere. If you ever want to stop watching the user’s location change, you can call the clearWatch() method and pass it this number, and the device will stop calling your callback function. If you’ve ever used the setInterval() and clearInterval() functions in JavaScript, this works the same way.</p>
+
+  	<h2 style="margin-top: 300px; text-align: center;">WHAT ABOUT IE?</h2>
+  	<p>Prior to version 9 (technically 9.0RC1), Internet Explorer did not support the <a href="">W3C geolocation API</a> that I’ve just described. But don’t despair! <a href="">Gears</a> is an open source browser plugin from Google that works on Windows, Mac, Linux, Windows Mobile, and Android. It provides features for older browsers. One of the features that Gears provides is a geolocation API. It’s not quite the same as the W3C geolocation API, but it serves the same purpose.</p>
+  	<p>While we’re on the subject of legacy platforms, I should point out that many older mobile phone platforms had their own device-specific geolocation APIs. <a href="">BlackBerry</a>, <a href="">Nokia</a>, <a href="">Palm</a>, and <a href="">OMTP BONDI</a> all provide their own geolocation APIs. Of course, they all work differently from Gears, which in turn works differently from the W3C geolocation API. Wheeeeee!</p><br>
+
+  	<h2 style="text-align: center;">GEO.JS TO THE RESCUE</h2>
+  	<p><a href="">geo.js</a> is an open source, MIT-licensed JavaScript library that smooths over the differences between the W3C geolocation API, the Gears API, and the APIs provided by mobile platforms. To use it, you’ll need to add two &lt;script&gt; elements at the bottom of your page. (Technically, you could put them anywhere, but scripts in your &lt;head&gt; will make your page load more slowly. So don’t do that!)</p>
+  	<p>The first script is <a href="">gears_init.js</a>, which initializes Gears if it’s installed. The second script is geo.js.</p>
+  	<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title>Dive Into HTML5&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  ...
+  <mark>&lt;script src="gears_init.js"&gt;&lt;/script&gt;</mark>                             <strong>Don’t let it go to your &lt;head&gt;</strong>
+  <mark>&lt;script src="geo.js"&gt;&lt;/script&gt;</mark>
+&lt;/body&gt;
+&lt;/html&gt;
+  	</pre>
+  	<p>Now you’re ready to use whichever geolocation API is installed.</p>
+
+  	<pre>
+  if (geo_position_js.init()) {
+    geo_position_js.getCurrentPosition(geo_success, geo_error);
+}
+  	</pre>
+  	<p>Let’s take that one step at a time. First, you need to explicitly call an init() function. The init() function returns true if a supported geolocation API is available.</p>
+  	<pre>
+  if (<mark>geo_position_js.init()</mark>) {
+  	</pre>
+  	<p>Calling the init() function does not actually find your location. It just verifies that finding your location is possible. To actually find your location, you need to call the getCurrentPosition() function.</p>
+  	<pre>
+  <marK>geo_position_js.getCurrentPosition</mark>(geo_success, geo_error);
+  	</pre>
+  	<p>The getCurrentPosition() function will trigger your browser to ask for your permission to find and share your location. If geolocation is being provided by Gears, this will pop up a dialog asking if your trust the web site to use Gears. If your browser natively supports the geolocation API, the dialog will look different. For example, Firefox 3.5 natively supports the geolocation API. If you try to find your location in Firefox 3.5, it will display an infobar at the top of the page asking whether you want to share your location with this web site.</p>
+  	<p>The getCurrentPosition() function takes two callback functions as arguments. If the getCurrentPosition() function was successful in finding your location — that is, you gave your permission and the geolocation API actually worked its magic — it will call the function passed in as the first argument. In this example, the success callback function is called geo_success.</p>
+  	<pre>
+  geo_position_js.getCurrentPosition(<mar>geo_success</mar>, geo_error);
+  	</pre>
+  	<p>The success callback function takes a single argument, which contains the position information.</p>
+  	<pre>
+  		<p><stronng>Success callback</stronng></p>
+  function geo_success(p) {
+    alert("Found you at latitude " + p.coords.latitude +
+      ", longitude " + p.coords.longitude);
+}
+  	</pre>
+  	<p>If the getCurrentPosition() function could not find your location — either because you declined to give your permission, or the geolocation API failed for some reason — it will call the function passed in as the second argument. In this example, the failure callback function is called geo_error.</p>
+  	<pre>
+  geo_position_js.getCurrentPosition(geo_success, <mark>geo_error</mark>);
+  	</pre>
+  	<p>The failure callback function takes no arguments.</p>
+  	<pre>
+  		<p><strong>Failure callback</strong></p>
+  function geo_error() {
+    alert("Could not find you!");
+}
+  	</pre>
+  	<p>geo.js does not currently support the watchPosition() function. If you need continuous location information, you’ll need to actively poll getCurrentPosition() yourself.</p><br>
+
+  	<h2 style="text-align: center;">A COMPLETE, LIVE EXAMPLE</h2>
+  	<p>Here is a live example of using <a href="">geo.js</a> to attempt to get your location and display a map of your immediate surroundings:</p>
+  	<img src="http://diveinto.html5doctor.com/i/openclipart.org_johnny_automatic_globe_man.png" alt="global" style="margin-right: auto; margin-left: auto; display:block;">
+  	<p style="text-align: center;">Your browser supports geolocation. <a href="">Click to look up your location.</a></p>
+  	<p>How does it work? Let’s take a look. On page load, this page calls geo_position_js.init() to determine whether geolocation is available through any of the interfaces that geo.js supports. If so, it sets up a link you can click to look up your location. Clicking that link calls the lookup_location() function, shown here:</p>
+  	<pre>
+  function lookup_location() {
+    geo_position_js.getCurrentPosition(show_map, show_map_error);
+}
+  	</pre>
+  	<p>If you give your consent to track your location, and the backend service was actually able to determine your location, geo.js calls the first callback function, show_map(), with a single argument, loc. The loc object has a coords property which contains latitude, longitude, and accuracy information. (This example doesn’t use the accuracy information.) The rest of the show_map() function uses the Google Maps API to set up an embedded map.</p>
+  	<pre>
+  function show_map(loc) {
+    $("#geo-wrapper").css({'width':'320px','height':'350px'});
+    var map = new GMap2(document.getElementById("geo-wrapper"));
+    var center = new GLatLng(<mark>loc.coords.latitude, loc.coords.longitude</mark>);
+    map.setCenter(center, 14);
+    map.addControl(new GSmallMapControl());
+    map.addControl(new GMapTypeControl());
+    map.addOverlay(new GMarker(center, {draggable: false, title: "You are here (more or less)"}));
+}
+  	</pre>
+  	<p>If geo.js is unable to determine your location, it calls the second callback function, show_map_error().</p>
+  	<pre>
+  function show_map_error() {
+    $("#live-geolocation").html('Unable to determine your location.');
+}
+  	</pre><br>
+
+  	<h2 style="text-align: center;">FURTHER READING</h2>
+  	<ul>
+  		<li><a href="">W3C geolocation API</a></li>
+  		<li><a href="">Gears</a></li>
+  		<li><a href="">BlackBerry geolocation API</a></li>
+  		<li><a href="">Nokia geolocation API</a></li>
+  		<li><a href="">Palm geolocation API</a></li>
+  		<li><a href="">OMTP BONDI geolocation API</a></li>
+  		<li><a href="">geo.js</a>, the geolocation API wrapper script</li>
+  		<li><a href="">Internet Explorer 9 Guide for Developers: Geolocation</a></li>
+  	</ul><br>
+  	<p>This has been “You Are Here (And So Is Everybody Else).” The <a href="">full table of contents</a> has more if you’d like to keep reading</p>
+
+  	<div>
+  		<p>DID YOU KNOW?</p>
+  		<p>In association with Google Press, O’Reilly is distributing this book in a variety of formats, including paper, ePub, Mobi, and DRM-free PDF. The paid edition is called “HTML5: Up & Running,” and it is available now. This chapter is included in the paid edition.</p>
+  		<p>If you liked this chapter and want to show your appreciation, you can <a href="">buy “HTML5: Up & Running” with this affiliate link or buy an electronic edition directly from O’Reilly</a>. You’ll get a book, and I’ll get a buck. I do not currently accept direct donations.</p>
+  	</div><br>
+  	<p style="text-align: center;">Copyright MMIX–MMXI <a href="">Mark Pilgrim</a></p><br>
+  	<form style="text-align: center;">
+  		<input type="text" name="" placeholder="powered by Google">
+  		<button>Search</button>
+  	</form>
+</body>
+</html>
