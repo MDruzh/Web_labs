@@ -7,27 +7,29 @@
 </head>
 <body>
 
-	<nav>
-		<img src="images/Lviv-logo.jpg" alt="lviv-logo">
-		<ul>
-			<li><a href="#">Main</a></li>
-			<li><a href="#">Matches</a>
-				<ul>
-					<li><a href="">Calendar of matches</a></li>
-					<li><a href="">Next games</a></li>
-					<li><a href="">Ratings</a></li>
-				</ul>
-			</li>
-			<li><a href="#">News</a></li>
-			<li><a href="#">Fans</a></li>
-			<li><a href="#">Contacts</a></li>
-			<li><a href="#">Admin</a></li>
-		</ul>
-	</nav>
+	<header>
+		<nav>
+			<img src="images/Lviv-logo.jpg" alt="lviv-logo">
+			<ul>
+				<li><a href="#">Main</a></li>
+				<li><a href="#">Matches</a>
+					<ul id="Sub_menu">
+						<li><a href="calendar.html">Calendar of matches</a></li>
+						<li><a href="">Next games</a></li>
+						<li><a href="">Ratings</a></li>
+					</ul>
+				</li>
+				<li><a href="#">News</a></li>
+				<li><a href="#">Fans</a></li>
+				<li><a href="#">Contacts</a></li>
+				<li><a href="#">Admin</a></li>
+			</ul>
+		</nav>
+	</header>
 
-	<main>
-		<img src="images/Large_logo.jpg" id="logo" alt="large-lviv-logo">
-		<h1>Ми любимо наше місто!</h1>
+	<content>
+		<img src="images/Large_logo.jpg" id="logo" class="slideUp" alt="large-lviv-logo">
+		<h1 class="fadeIn">Ми любимо наше місто!</h1>
 		<div id="history">
 			<h2 style="text-align: center; color: #0059b3; font-size: 48px;">Історія</h2>
 			<ul><strong>
@@ -49,10 +51,9 @@
 			<img src="images/lv.png" id="lv" alt="lviv">
 			<img src="images/ol.png" id="ol" alt="olexandria">
 		</div>
-	</main>
+	</content>
 
 	<footer>
-		<!-- <h4 style="text-align: center; color: #0059b3; padding-top: 15px;">©All rights reserved</h4> -->
 		<img src="images/glusco.jpg" style="padding-top: 10px; padding-left: 420px;" alt="glusco">
 		<img src="images/KD.jpg" style="padding-left: 50px;" alt="Karpatska Dzherelna">
 		<img src="images/limo.jpg" style="padding-left: 50px;" alt="limo">
