@@ -1,10 +1,7 @@
-nav {
-    margin: 0;
-    background-color: #99ccff;
-    top: 0;
-    width: 100%;
-    position: fixed;
+#Menu {
+    background-color: white;
 }
+
 nav img {
 	float: right;
 }
@@ -17,7 +14,6 @@ nav ul {
 nav ul li {
 	margin: 0px 30px 0 0;
 	display:inline-block;
-/*	background-color: #99ccff;*/
 }
 nav a {
 	display:block;
@@ -48,8 +44,12 @@ a:hover {
 	background-color: #000000;
 }
 #logo {
-	margin-left: 440px;
-	margin-top: 100px;
+	margin-left: 30%;
+    margin-right: 30%;
+    margin-bottom: 5%;
+	margin-top: 5%;
+    max-width: 100%;
+
 }
 .slideUp{
     animation-name: slideUp;
@@ -181,13 +181,25 @@ content h1{
 }
 
 #lv {
-	margin-left: 540px;
-	margin-top: -100px;
+	margin-left: 8%;
+    margin-right: 8%;
+/*	margin-top: -6%;
+    margin-bottom: 1%;*/
+    max-width: 100%;
+    width: 120px;
+    height: 100px;
+/*    width: 50%*/
 }
 
 #ol {
-	margin-left: 85px;
-	margin-top: -100px;
+	margin-left: 8%;
+    margin-right: 8%;
+/*	margin-top: -6%;
+    margin-bottom: 1%;*/
+    max-width: 100%;
+/*    width: 50%;*/
+    width: 100px;
+    height: 100px;
 }
 footer {
 	width: 100%;
