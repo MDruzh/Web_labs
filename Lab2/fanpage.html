@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Calendar of matches</title>
+	<title>Fan Page</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="css/calendar.css">
-
+	<link rel="stylesheet" type="text/css" href="css/fan.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -16,29 +15,9 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
-<body>
+<body onload="addElementLocalStorig()">
 
-<!-- 	<header>
-		<nav>
-			<img src="images/Lviv-logo.jpg" alt="lviv-logo">
-			<ul>
-				<li><a href="index.html">Main</a></li>
-				<li><a href="#">Matches</a>
-					<ul>
-						<li><a href="calendar.html">Calendar of matches</a></li>
-						<li><a href="">Next games</a></li>
-						<li><a href="">Ratings</a></li>
-					</ul>
-				</li>
-				<li><a href="#">News</a></li>
-				<li><a href="#">Fans</a></li>
-				<li><a href="#">Contacts</a></li>
-				<li><a href="#">Admin</a></li>
-			</ul>
-		</nav>
-	</header> -->
-
-	<header class="col-md-12">
+  <header class="col-md-12">
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -71,51 +50,37 @@
       </nav>
   </header>
 
-	<main>
-		<table align="center">
-			<caption>Розклад матчів</caption>
-			<tr>
-				<th class="table-animation">Дата матчу</th>
-				<th class="table-animation">Місце проведення</th>
-				<th class="table-animation">Суперник/турнір</th>
-			</tr>
-			<tr>
-				<td align="center" class="table-animation">16.09.2018, 19:30</td>
-				<td align="center" class="table-animation">м. Одеса, ст."Чорноморець"</td>
-				<td align="center" class="table-animation">ФК "Чорноморець", Прем'єр-Ліга, 8 тур</td>
-			</tr>
-			<tr>
-				<td align="center" class="table-animation">22.09.2018, 17:00</td>
-				<td align="center" class="table-animation">м. Львів, ст."Арена-Львів"</td>
-				<td align="center" class="table-animation">ФК "Карпати", Прем'єр-Ліга, 9 тур</td>
-			</tr>
-			<tr>
-				<td align="center" class="table-animation">30.09.2018, 14:00</td>
-				<td align="center" class="table-animation">м. Запоріжжя, ст."Металург"</td>
-				<td align="center" class="table-animation">ФК "Зоря", Прем'єр-Ліга, 10 тур</td>
-			</tr>
-			<tr>
-				<td align="center" class="table-animation">06.10.2018, 14:00</td>
-				<td align="center" class="table-animation">м. Львів, ст."Арена-Львів"</td>
-				<td align="center" class="table-animation">ФК "Десна", Прем'єр-Ліга, 11 тур</td>
-			</tr>
-			<tr>
-				<td align="center" class="table-animation">19.10.2018, 14:00</td>
-				<td align="center" class="table-animation">м. Львів, ст."Арена-Львів"</td>
-				<td align="center" class="table-animation">ФК "Арсенал-Київ", Прем'єр-Ліга, 11 тур</td>
-			</tr>							
-		</table>
-	</main>
+  <content>
+    <h1 style="text-align: center;">Звернення фанів</h1>
+    <div id="con">
+    	<div style="display: block; padding-top: 5%" >
+    		<p style="padding-left: 10%; padding-right: 10%; padding-top: 3%">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    		<span style="padding-left: 10%">08.10.2018, 18:45</span><span style="float: right; padding-right: 12%">ТзОВ "ФК Львів"</span>
+    		<hr>
+    	</div>
 
-	<footer style="overflow: hidden; height: auto; display: flex; justify-content: space-around;" class="col-md-12 text-center">
+    	<div style="display: block;">
+    		<p style="padding-left: 10%; padding-right: 10%; padding-top: 3%">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    		<span style="padding-left: 10%">08.10.2018, 18:45</span><span style="float: right; padding-right: 12%">ТзОВ "ФК Львів"</span>
+    		<hr>
+    	</div>
+    </div>
+  	<div>
+      <input id="name" value='"ФК Львів"' class="col-md-4" style="width: 110px; margin-left: 150px">
+  		<textarea  id="text" style="margin-left: 5%; padding-right: 45%" name="text_field cols="90" rows="10" placeholder="Написати зверненння"></textarea>
+  		<input onclick="addElement()" type="submit" value="Відправити" style="margin-left: 3%;">
+  	</div>
+  </content>
+
+  	<footer style="overflow: hidden; height: auto; display: flex; justify-content: space-around;" class="col-md-12 text-center">
 		<img src="images/glusco.jpg"" alt="glusco">
 		<img src="images/KD.jpg" style="padding-left: 10px;" alt="Karpatska Dzherelna">
 		<img src="images/limo.jpg" style="padding-left: 10px;" alt="limo">
 		<img src="images/legea.jpg" style="padding-left: 10px" alt="legea">
 	</footer>
-<!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/addCommitFans.js"></script>
 </body>
 </html>

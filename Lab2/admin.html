@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Calendar of matches</title>
+	<title>Admin Page</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="css/calendar.css">
+	<link rel="stylesheet" type="text/css" href="css/admin.css">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Latest compiled and minified CSS -->
@@ -14,31 +14,11 @@
 	<!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>		
 </head>
 <body>
 
-<!-- 	<header>
-		<nav>
-			<img src="images/Lviv-logo.jpg" alt="lviv-logo">
-			<ul>
-				<li><a href="index.html">Main</a></li>
-				<li><a href="#">Matches</a>
-					<ul>
-						<li><a href="calendar.html">Calendar of matches</a></li>
-						<li><a href="">Next games</a></li>
-						<li><a href="">Ratings</a></li>
-					</ul>
-				</li>
-				<li><a href="#">News</a></li>
-				<li><a href="#">Fans</a></li>
-				<li><a href="#">Contacts</a></li>
-				<li><a href="#">Admin</a></li>
-			</ul>
-		</nav>
-	</header> -->
-
-	<header class="col-md-12">
+<header class="col-md-12">
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -69,53 +49,38 @@
           </div>
         </div>
       </nav>
-  </header>
+  </header>	
 
-	<main>
-		<table align="center">
-			<caption>Розклад матчів</caption>
-			<tr>
-				<th class="table-animation">Дата матчу</th>
-				<th class="table-animation">Місце проведення</th>
-				<th class="table-animation">Суперник/турнір</th>
-			</tr>
-			<tr>
-				<td align="center" class="table-animation">16.09.2018, 19:30</td>
-				<td align="center" class="table-animation">м. Одеса, ст."Чорноморець"</td>
-				<td align="center" class="table-animation">ФК "Чорноморець", Прем'єр-Ліга, 8 тур</td>
-			</tr>
-			<tr>
-				<td align="center" class="table-animation">22.09.2018, 17:00</td>
-				<td align="center" class="table-animation">м. Львів, ст."Арена-Львів"</td>
-				<td align="center" class="table-animation">ФК "Карпати", Прем'єр-Ліга, 9 тур</td>
-			</tr>
-			<tr>
-				<td align="center" class="table-animation">30.09.2018, 14:00</td>
-				<td align="center" class="table-animation">м. Запоріжжя, ст."Металург"</td>
-				<td align="center" class="table-animation">ФК "Зоря", Прем'єр-Ліга, 10 тур</td>
-			</tr>
-			<tr>
-				<td align="center" class="table-animation">06.10.2018, 14:00</td>
-				<td align="center" class="table-animation">м. Львів, ст."Арена-Львів"</td>
-				<td align="center" class="table-animation">ФК "Десна", Прем'єр-Ліга, 11 тур</td>
-			</tr>
-			<tr>
-				<td align="center" class="table-animation">19.10.2018, 14:00</td>
-				<td align="center" class="table-animation">м. Львів, ст."Арена-Львів"</td>
-				<td align="center" class="table-animation">ФК "Арсенал-Київ", Прем'єр-Ліга, 11 тур</td>
-			</tr>							
-		</table>
-	</main>
+  <content>
+    <div>
+      <img id="example_picture" src="images/admin_squade.jpg">
+    </div>
+  	<div id="addPicture" class="col-lg-4">
+                  <form class="col-md-4">
+                  <label for="formForFile">Вибрати зображення</label>
+                    <input id="formForFile" type="file" class="btn btn-success form-control">
+                </form>
+    </div>
+<!--   	<form>
+  		<input type="button" name="add" value="Add image" style="float: right; margin-right: 8%; margin-top: -3.5%; padding: 1% 3% 1% 3%">
+  	</form> -->
+    <div>
+  	  <textarea class="col-md-3" id="caption" style="margin-left: 10%; padding-right: 15%; margin-top: 2%;" name="text_field cols="90" rows="2" placeholder="News title"></textarea>
+  	  <textarea id="text" style="margin-left: 10%; padding-right: 30%; margin-top: 2%;" name="text_field cols="90" rows="10" placeholder="News text"></textarea>
+  	  <input id="sub" type="button" onclick="addingNews()" name="add" value="Add news" style="float: right; margin-right: 8%; margin-top: 2%; padding: 1% 3% 1% 3%;">
+      </div>
+  </content>	
 
-	<footer style="overflow: hidden; height: auto; display: flex; justify-content: space-around;" class="col-md-12 text-center">
+   	<footer style="overflow: hidden; height: auto; display: flex; justify-content: space-around; margin-top: 18%;" class="col-md-12 text-center">
 		<img src="images/glusco.jpg"" alt="glusco">
 		<img src="images/KD.jpg" style="padding-left: 10px;" alt="Karpatska Dzherelna">
 		<img src="images/limo.jpg" style="padding-left: 10px;" alt="limo">
 		<img src="images/legea.jpg" style="padding-left: 10px" alt="legea">
-	</footer>
+	</footer> 
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/addAdmin.js"></script>
 </body>
 </html>

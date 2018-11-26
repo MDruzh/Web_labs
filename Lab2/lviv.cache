@@ -1,0 +1,26 @@
+CACHE MANIFEST
+# version 1.0
+
+CACHE:
+css/style.css
+css/contacts.css
+images/Large_logo.jpg
+images/legea.png
+images/legea.jpg
+images/limo.jpg
+images/glusco.jpg
+images/glusco.png
+images/ol.png
+images/lv.png
+images/Large_logo.gif
+images/KD.jpg
+error.html
+index.html
+contacts.html
+
+
+FALLBACK:
+/news.html /error.html
+/admin.html /error.html
+/fanpage.html /error.html
+/calendar.html /error.html
