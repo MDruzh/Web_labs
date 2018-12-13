@@ -52,13 +52,15 @@
 
   <content>
     <h1 style="text-align: center;">Звернення фанів</h1>
-    <div id="con">
-    	<div style="display: block; padding-top: 5%" >
+    <div class="container" id="container">
+    	<div style="display: block; padding-top: 5%">
     		<p style="padding-left: 10%; padding-right: 10%; padding-top: 3%">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     		<span style="padding-left: 10%">08.10.2018, 18:45</span><span style="float: right; padding-right: 12%">ТзОВ "ФК Львів"</span>
     		<hr>
     	</div>
+    </div>
 
+      <div class="container" id="container">
     	<div style="display: block;">
     		<p style="padding-left: 10%; padding-right: 10%; padding-top: 3%">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     		<span style="padding-left: 10%">08.10.2018, 18:45</span><span style="float: right; padding-right: 12%">ТзОВ "ФК Львів"</span>
@@ -68,7 +70,7 @@
   	<div>
       <input id="name" value='"ФК Львів"' class="col-md-4" style="width: 110px; margin-left: 150px">
   		<textarea  id="text" style="margin-left: 5%; padding-right: 45%" name="text_field cols="90" rows="10" placeholder="Написати зверненння"></textarea>
-  		<input onclick="addElement()" type="submit" value="Відправити" style="margin-left: 3%;">
+  		<input onclick="complete()" type="submit" value="Відправити" style="margin-left: 3%;">
   	</div>
   </content>
 
@@ -81,6 +83,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="js/addCommitFans.js"></script>
+<script src="js/fans.js"></script>
 </body>
 </html>
