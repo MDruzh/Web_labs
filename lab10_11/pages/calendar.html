@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calendar of matches</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../css/calendar.css">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!-- 	<header>
+		<nav>
+			<img src="images/Lviv-logo.jpg" alt="lviv-logo">
+			<ul>
+				<li><a href="index.html">Main</a></li>
+				<li><a href="#">Matches</a>
+					<ul>
+						<li><a href="calendar.html">Calendar of matches</a></li>
+						<li><a href="">Next games</a></li>
+						<li><a href="">Ratings</a></li>
+					</ul>
+				</li>
+				<li><a href="#">News</a></li>
+				<li><a href="#">Fans</a></li>
+				<li><a href="#">Contacts</a></li>
+				<li><a href="#">Admin</a></li>
+			</ul>
+		</nav>
+	</header> -->
+
+	<header class="col-md-12">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#Menu">
+                      <span class="sr-only">Навигация</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                <a class="navbar-brand" href="#">FC Lviv</a>
+            </div>
+          <div id = "Menu" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="../index.html">Main</a></li>
+              <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Matches <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                  <li><a href="Calendar.html">Calendar of matches</a></li>
+                  <li><a href="">Next game</a></li>
+                  <li><a href="">Raitings</a></li>
+                </ul>
+              </li>
+              <li><a href="news.html">News</a></li>
+              <li><a href="fans.html">Fans</a></li>
+              <li><a href="contacts.html">Contacs</a></li>
+              <li><a href="admin.html">Admin</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+  </header>
+
+	<main>
+		<table align="center">
+			<caption>Розклад матчів</caption>
+			<tr>
+				<th class="table-animation">Дата матчу</th>
+				<th class="table-animation">Місце проведення</th>
+				<th class="table-animation">Суперник/турнір</th>
+			</tr>
+			<tr>
+				<td align="center" class="table-animation">16.09.2018, 19:30</td>
+				<td align="center" class="table-animation">м. Одеса, ст."Чорноморець"</td>
+				<td align="center" class="table-animation">ФК "Чорноморець", Прем'єр-Ліга, 8 тур</td>
+			</tr>
+			<tr>
+				<td align="center" class="table-animation">22.09.2018, 17:00</td>
+				<td align="center" class="table-animation">м. Львів, ст."Арена-Львів"</td>
+				<td align="center" class="table-animation">ФК "Карпати", Прем'єр-Ліга, 9 тур</td>
+			</tr>
+			<tr>
+				<td align="center" class="table-animation">30.09.2018, 14:00</td>
+				<td align="center" class="table-animation">м. Запоріжжя, ст."Металург"</td>
+				<td align="center" class="table-animation">ФК "Зоря", Прем'єр-Ліга, 10 тур</td>
+			</tr>
+			<tr>
+				<td align="center" class="table-animation">06.10.2018, 14:00</td>
+				<td align="center" class="table-animation">м. Львів, ст."Арена-Львів"</td>
+				<td align="center" class="table-animation">ФК "Десна", Прем'єр-Ліга, 11 тур</td>
+			</tr>
+			<tr>
+				<td align="center" class="table-animation">19.10.2018, 14:00</td>
+				<td align="center" class="table-animation">м. Львів, ст."Арена-Львів"</td>
+				<td align="center" class="table-animation">ФК "Арсенал-Київ", Прем'єр-Ліга, 11 тур</td>
+			</tr>							
+		</table>
+	</main>
+
+	<footer style="overflow: hidden; height: auto; display: flex; justify-content: space-around;" class="col-md-12 text-center">
+		<img src="../images/glusco.jpg"" alt="glusco">
+		<img src="../images/KD.jpg" style="padding-left: 10px;" alt="Karpatska Dzherelna">
+		<img src="../images/limo.jpg" style="padding-left: 10px;" alt="limo">
+		<img src="../images/legea.jpg" style="padding-left: 10px" alt="legea">
+	</footer>
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+</html>
